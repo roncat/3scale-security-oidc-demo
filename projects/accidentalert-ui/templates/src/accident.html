@@ -395,7 +395,8 @@
 		var keyOptions = {
 			url: 'http://localhost:18080/auth',
 			realm: 'insurance',
-			clientId: 'accidentalert-ui'
+			clientId: '1674a1c9',
+			secret: 'db8853fec364a9ebc641c462f98fa709'
 		};
 		var keycloak = Keycloak(keyOptions);
 		keycloak.init({ onLoad: 'check-sso' }).success(function (authenticated) {
