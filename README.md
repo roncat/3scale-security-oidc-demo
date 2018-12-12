@@ -140,6 +140,14 @@ Follow this instructions to setup a working demo environment.
 
 * Passos necessários para Setup do ambiente
 
+1. Se estiver usando ambiente 3Scale puro RHPDS
+
+    ```
+	  oc delete project products-api
+	  oc delete project apicurio
+	  oc delete project swagger-import
+    ```
+
 1. Criar o projeto e a aplicação Backend Alert Service
 
     ```
