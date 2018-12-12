@@ -160,6 +160,8 @@ Follow this instructions to setup a working demo environment.
     oc process -f https://raw.githubusercontent.com/<USUARIO_GITHUB>/3scale-security-oidc-demo/master/support/templates/accidentalert-ui-template.json -p SSO_URL='' -p BACKEND_URL='' -p APPLICATION_HOSTNAME='' | oc create -f -
     ```
 
+   No último comando acima é preciso substituir os parâmetros pelos resultados dos comandos anteriores
+   
 
 
 
