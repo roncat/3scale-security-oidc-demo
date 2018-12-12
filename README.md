@@ -135,6 +135,33 @@ Follow this instructions to setup a working demo environment.
 1. Make the application client public in RH SSO.
 1. Update the application clientId in the web ui code.
 
-### Support & Ownership
 
-Feel free to ask [Hugo Guerrero](https://github.com/hguerrero) if you need some support when there are any questions left or if you need some support.
+## Test-Drive 3Scale
+
+* Passos necessários para Setup do ambiente
+
+1. Criar o projeto e a aplicação Backend Alert Service
+
+    ```
+    oc new-project service --display-name='Alert Center Backend Service'
+    oc process -f https://raw.githubusercontent.com/jbossdemocentral/3scale-security-oidc-demo/master/support/templates/amq63-basic-template.json -p MQ_USERNAME=admin -p MQ_PASSWORD=admin | oc create -f -
+    oc process -f https://raw.githubusercontent.com/jbossdemocentral/3scale-security-oidc-demo/master/support/templates/accidentalert-backend-template.json -p APP_NAME=accidentalert-backend -p GIT_REPO=https://github.com/jbossdemocentral/3scale-security-oidc-demo.git -p GIT_REF=master -p CONTEXT_DIR=/projects/myaccidentalert -p ACTIVEMQ_BROKER_USERNAME=admin -p ACTIVEMQ_BROKER_PASSWORD=admin -p CPU_REQUEST=1 -p MEMORY_REQUEST=512Mi -p MEMORY_LIMIT=1024Mi | oc create -f -
+    ```
+
+1. Criar o projeto e a aplicação Frontend Accident Alert
+
+    **Fazer FORK desse projeto para seu Github**
+
+    ```
+    oc new-project www
+    oc get route sso -n rh-sso --no-headers | awk '{print "https://"$2}'
+    oc get route accidentalert-backend -n service --no-headers | awk '{print "http://"$2}'
+    oc get route accidentalert-backend -n service --no-headers | awk '{print $2}' | sed -e "s/accidentalert-backend-service/accidentalert-ui-http/g"
+    oc process -f https://raw.githubusercontent.com/<USUARIO_GITHUB>/3scale-security-oidc-demo/master/support/templates/accidentalert-ui-template.json -p SSO_URL='' -p BACKEND_URL='' -p APPLICATION_HOSTNAME='' | oc create -f -
+    ```
+
+
+
+
+
+
